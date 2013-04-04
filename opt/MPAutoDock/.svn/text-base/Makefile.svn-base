@@ -1,0 +1,28 @@
+include ../../../Make.rules
+include ../../sst/Make.rules
+
+autodock-bgq-omp-nompi-xl: cleanbgqnompixl autodock4-bgq-omp-nompi-xl
+
+autodock-bgq-omp-nompi-toolchain: cleanbgqnompitoolchain autodock4-bgq-omp-nompi-toolchain
+
+cleanbgqnompixl:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-nompi-xl
+	rm -rf autodock4-bgq-omp-nompi-xl
+
+cleanbgqnompitoolchain:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-nompi-toolchain
+	rm -rf autodock4-bgq-omp-nompi-toolchain
+
+
+autodock4-bgq-omp-nompi-xl:
+	export MPICH_CC=/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlC_r
+	make -f Makefile.base DEFS='-DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlc_r' SELECTED_CPPCOMPILER='/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlC_r' AM_CXXFLAGS='-O3 -qsmp=omp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-nompi-xl CXX='${XLCXX_R}' autodock4-bgq-omp-nompi-xl
+	unset MPICH_CC
+
+autodock4-bgq-omp-nompi-toolchain:
+	make -f Makefile.base DEFS='-DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/bgsys/drivers/ppcfloor/gnu-linux/bin/powerpc64-bgq-linux-gcc' SELECTED_CPPCOMPILER='/bgsys/drivers/ppcfloor/gnu-linux/bin/powerpc64-bgq-linux-gcc' AM_CXXFLAGS='-O3 -fopenmp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-nompi-toolchain CXX='${BGQ_CROSS_CXX}' autodock4-bgq-omp-nompi-toolchain
+

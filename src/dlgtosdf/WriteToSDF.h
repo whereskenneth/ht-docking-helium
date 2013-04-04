@@ -1,0 +1,10 @@
+
+
+void process_and_convert(std::vector<std::vector<std::string> > pdbqt_file_array, std::vector<std::string> SDTags, std::vector<OpenBabel::OBMol>* mol_array,std::string receptor_name);
+
+int parse_dlg(std::vector<std::string> DLG_file, 
+std::vector<std::vector<std::string> >* mol_vector_in_pdbqt, std::string* receptor_name);
+
+std::vector<std::string> read_input_dlg(std::string InputFile);
+
+int writesdf(std::vector<std::string> InputFileList, std::string OutputFile);

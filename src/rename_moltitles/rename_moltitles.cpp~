@@ -1,0 +1,175 @@
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <string>
+#include <stdio.h>
+#include <time.h>
+#include <math.h>
+
+#include <openbabel/obconversion.h>
+#include <openbabel/mol.h>
+#include <openbabel/descriptor.h>
+#include <openbabel/generic.h>
+#include <boost/program_options.hpp>
+namespace po=boost::program_options;
+
+
+int main(int argc, char *argv[]) {
+
+	po::options_description desc("Options:");
+	desc.add_options()
+		("help,h", "Produce this message")
+		("input,i", po::value< std::string >(), "Input sdf file for mol title renaming")
+		("prefix,p", po::value< std::string >(), "Prefix for renaming mols in file")
+		("output,o", po::value< std::string >(), "Output filename")
+		("tag,t",po::value< std::string >(), "SDF tag to use to replace the name of the molecule")
+	;
+
+	po::variables_map vm;
+	po::store(po::parse_command_line(argc,argv,desc), vm);
+	po::notify(vm);
+
+
+	std::string input_filename;
+	std::string output_filename;
+	std::string prefix;
+	std::string SDtag;
+
+
+	if (vm.count("help")) {
+		std::cout << desc << std::endl;
+
+		printf("This program will rename the molecular titles of all molecules in a given database. The renaming can be performed using either intrinsic SD data contained in the molecular file, or can be named after a given prefix. The choice is entirely left up to the user.");
+
+		return 1;
+	}
+
+	if (vm.count("input")) {
+
+		input_filename=vm["input"].as<std::string>();
+	}
+	else {
+
+		std::cout <<desc << std::endl;
+		std::cout << "No input file!" << std::endl;
+		return 1;
+
+	}
+
+	if (vm.count("tag") && !vm.count("prefix")) { 
+		
+		SDtag = vm["tag"].as<std::string>();
+	}
+	else if (vm.count("prefix") && !vm.count("tag")) {
+
+		prefix=vm["prefix"].as<std::string>();
+	}
+	else {
+	
+		std::cout << "No renaming parameters given!" << std::endl;
+		return 1;
+	}
+
+	if (vm.count("output")) {
+
+		output_filename = vm["output"].as<std::string>();
+
+	}
+
+	else {
+
+		std::stringstream random_number1;
+		random_number1 << rand()%10000;
+		output_filename = input_filename + random_number1.str();
+
+	}
+
+	OpenBabel::OBConversion obconversion;
+	OpenBabel::OBMol mol;
+	
+
+	obconversion.SetInFormat("sdf");
+	obconversion.SetOutFormat("sdf");
+	
+	bool notatend = obconversion.ReadFile(&mol,input_filename);
+	bool has_data;
+
+
+	int molcounter=0;
+
+	
+
+
+	std::ofstream ofs(output_filename.c_str());
+	obconversion.SetOutStream(&ofs);
+		
+	
+	while (notatend) {
+
+
+		if (SDtag.size()) {  
+
+			std::vector<OpenBabel::OBGenericData*>::iterator k;
+			std::vector<OpenBabel::OBGenericData*> vdata = mol.GetData();
+
+			has_data=false;
+	
+			for (k=vdata.begin(); k != vdata.end(); ++k) {
+
+				if ( (*k)->GetAttribute() == SDtag ) {
+
+					has_data=true;
+					
+					std::istringstream datavaluestring (((OpenBabel::OBPairData*)(*k))->GetValue(),std::istringstream::in);
+					mol.SetTitle(datavaluestring.str().c_str());
+
+				}
+			}
+		if (!has_data) { 
+			
+			std::cout << desc << std::endl;
+			std::cout << "File does not contain required data in field " << SDtag << "." << std::endl;
+
+			return 1; 
+		}
+
+
+
+
+
+
+
+		}
+
+
+
+		if (prefix.size()) { 
+
+			
+			
+
+
+
+			std::stringstream counter;
+			counter << molcounter;
+
+			std::string prefix_molcounter(prefix + counter.str());
+
+
+			mol.SetTitle(prefix_molcounter);
+		}
+
+		
+		obconversion.Write(&mol);
+
+		notatend = obconversion.Read(&mol);
+
+		molcounter++;
+
+	}
+
+	return 0;
+
+}
+
+

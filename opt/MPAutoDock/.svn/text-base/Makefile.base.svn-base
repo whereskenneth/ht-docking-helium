@@ -1,0 +1,1012 @@
+
+# This is the base Makefile for building autodock for BGP and POWER7 - the DEFS, 
+# SELECTED_CCOMPILER and AM_CXXFLAGS variables should be defined in the make call
+# using thie file and that is done in the main Makefile.
+# It was originally generated using automake and then modified, there were too many
+# issue with trying to modify the automake configuration files to correctly build
+# this file, so this build process no longer uses automake.  Therefore there are several
+# remnants of the automake process still within this file that should be overlooked.
+#
+# AutoDock 
+# 
+# Copyright (C) 1989-2007,  Garrett M. Morris,   TSRI
+# All Rights Reserved.
+# 
+# AutoDock is a Trade Mark of The Scripps Research Institute.
+# 
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+# 
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+# 
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+# Autotools
+
+
+pkgdatadir = $(datadir)/autodock
+pkgincludedir = $(includedir)/autodock
+pkglibdir = $(libdir)/autodock
+pkglibexecdir = $(libexecdir)/autodock
+am__cd = CDPATH="$${ZSH_VERSION+.}$(PATH_SEPARATOR)" && cd
+install_sh_DATA = $(install_sh) -c -m 644
+install_sh_PROGRAM = $(install_sh) -c
+install_sh_SCRIPT = $(install_sh) -c
+INSTALL_HEADER = $(INSTALL_DATA)
+transform = $(program_transform_name)
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+build_triplet = powerpc64-unknown-linux-gnu
+host_triplet = powerpc64-unknown-linux-gnu
+bin_PROGRAMS = ${AUTODOCK_EXEC_NAME}$(EXEEXT)
+subdir = .
+DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
+	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
+	ChangeLog INSTALL NEWS config.guess config.sub depcomp \
+	install-sh missing
+ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
+am__aclocal_m4_deps = $(top_srcdir)/configure.ac
+am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
+	$(ACLOCAL_M4)
+am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
+ configure.lineno config.status.lineno
+mkinstalldirs = $(install_sh) -d
+CONFIG_CLEAN_FILES =
+CONFIG_CLEAN_VPATH_FILES =
+LIBRARIES = $(noinst_LIBRARIES)
+AR = /bgsys/drivers/ppcfloor/gnu-linux/bin/powerpc64-bgq-linux-ar
+ARFLAGS = cru
+libad_a_AR = $(AR) $(ARFLAGS)
+libad_a_LIBADD =
+am_libad_a_OBJECTS = analysis.$(OBJEXT) \
+	atom_parameter_manager.$(OBJEXT) banner.$(OBJEXT) \
+	bestpdb.$(OBJEXT) calculateEnergies.$(OBJEXT) \
+	call_glss.$(OBJEXT) call_gs.$(OBJEXT) call_ls.$(OBJEXT) \
+	changeState.$(OBJEXT) check_header_float.$(OBJEXT) \
+	check_header_int.$(OBJEXT) check_header_line.$(OBJEXT) \
+	cluster_analysis.$(OBJEXT) clmode.$(OBJEXT) \
+	cnv_state_to_coords.$(OBJEXT) com.$(OBJEXT) \
+	conformation_sampler.$(OBJEXT) distdepdiel.$(OBJEXT) \
+	stateLibrary.$(OBJEXT) readfield.$(OBJEXT) readmap.$(OBJEXT) \
+	readPDBQT.$(OBJEXT) read_parameter_library.$(OBJEXT) \
+	eval.$(OBJEXT) gencau.$(OBJEXT) getrms.$(OBJEXT) \
+	get_atom_type.$(OBJEXT) getInitialState.$(OBJEXT) \
+	getpdbcrds.$(OBJEXT) gs.$(OBJEXT) initautodock.$(OBJEXT) \
+	input_state.$(OBJEXT) investigate.$(OBJEXT) linpack.$(OBJEXT) \
+	ls.$(OBJEXT) mapping.$(OBJEXT) minmeanmax.$(OBJEXT) \
+	mkNewState.$(OBJEXT) mkTorTree.$(OBJEXT) \
+	mkRandomState.$(OBJEXT) nonbonds.$(OBJEXT) openfile.$(OBJEXT) \
+	output_state.$(OBJEXT) parse_dpf_line.$(OBJEXT) \
+	parse_param_line.$(OBJEXT) parse_PDBQT_line.$(OBJEXT) \
+	parse_trj_line.$(OBJEXT) parsetypes.$(OBJEXT) \
+	print_2x.$(OBJEXT) print_atomic_energies.$(OBJEXT) \
+	print_avsfld.$(OBJEXT) writePDBQT.$(OBJEXT) \
+	print_rem.$(OBJEXT) printdate.$(OBJEXT) \
+	printEnergies.$(OBJEXT) printhms.$(OBJEXT) \
+	prClusterHist.$(OBJEXT) prInitialState.$(OBJEXT) \
+	prTorConList.$(OBJEXT) qmultiply.$(OBJEXT) \
+	qtransform.$(OBJEXT) quicksort.$(OBJEXT) ranlib.$(OBJEXT) \
+	rep.$(OBJEXT) scauchy.$(OBJEXT) setflags.$(OBJEXT) \
+	simanneal.$(OBJEXT) sort_enrg.$(OBJEXT) stack.$(OBJEXT) \
+	stop.$(OBJEXT) strindex.$(OBJEXT) success.$(OBJEXT) \
+	support.$(OBJEXT) swap.$(OBJEXT) timesys.$(OBJEXT) \
+	timesyshms.$(OBJEXT) torNorVec.$(OBJEXT) torsion.$(OBJEXT) \
+	trilinterp.$(OBJEXT) usage.$(OBJEXT) weedbonds.$(OBJEXT) \
+	warn_bad_file.$(OBJEXT) coliny.$(OBJEXT) eintcal.$(OBJEXT) \
+	eintcalPrint.$(OBJEXT) intnbtable.$(OBJEXT) nbe.$(OBJEXT)
+libad_a_OBJECTS = $(am_libad_a_OBJECTS)
+am__installdirs = "$(DESTDIR)$(bindir)"
+PROGRAMS = $(bin_PROGRAMS)
+am_autodock4_OBJECTS = main.$(OBJEXT)
+autodock4_OBJECTS = $(am_autodock4_OBJECTS)
+autodock4_DEPENDENCIES = libad.a
+autodock4_LINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) \
+	$(autodock4_LDFLAGS) $(LDFLAGS) -o $@
+DEFAULT_INCLUDES = -I.
+depcomp = $(SHELL) $(top_srcdir)/depcomp
+am__depfiles_maybe = depfiles
+am__mv = mv -f
+CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
+	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(AM_LDFLAGS) $(LDFLAGS) \
+	-o $@
+COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
+	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(AM_LDFLAGS) $(LDFLAGS) -o $@
+SOURCES = $(libad_a_SOURCES) $(autodock4_SOURCES)
+DIST_SOURCES = $(libad_a_SOURCES) $(autodock4_SOURCES)
+ETAGS = etags
+CTAGS = ctags
+DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
+distdir = $(PACKAGE)-$(VERSION)
+top_distdir = $(distdir)
+am__remove_distdir = \
+  { test ! -d "$(distdir)" \
+    || { find "$(distdir)" -type d ! -perm -200 -exec chmod u+w {} ';' \
+         && rm -fr "$(distdir)"; }; }
+DIST_ARCHIVES = $(distdir).tar.gz
+GZIP_ENV = --best
+distuninstallcheck_listfiles = find . -type f -print
+distcleancheck_listfiles = find . -type f -print
+
+# ACLOCAL = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run aclocal-1.11
+# AMTAR = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run tar
+# AUTOCONF = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run autoconf
+# AUTOHEADER = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run autoheader
+# AUTOMAKE = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run automake-1.11
+AWK = gawk
+CC = ${SELECTED_CCOMPILER}
+CCDEPMODE = depmode=none
+CFLAGS = -g
+CPP = ${SELECTED_CCOMPILER} -E
+CPPFLAGS = 
+CXX = ${SELECTED_CPPCOMPILER}
+CXXDEPMODE = depmode=gcc3
+CXXFLAGS = 
+CYGPATH_W = echo
+DEPDIR = .deps
+ECHO_C = 
+ECHO_N = -n
+ECHO_T = 
+EGREP = /usr/bin/grep -E
+EXEEXT = 
+GREP = /usr/bin/grep
+INSTALL = /usr/bin/install -c
+INSTALL_DATA = ${INSTALL} -m 644
+INSTALL_PROGRAM = ${INSTALL}
+INSTALL_SCRIPT = ${INSTALL}
+INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
+LDFLAGS = 
+LIBOBJS = 
+LIBS = 
+LTLIBOBJS = 
+# MAKEINFO = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/missing --run makeinfo
+MKDIR_P = /bin/mkdir -p
+OBJEXT = o
+PACKAGE = autodock
+PACKAGE_BUGREPORT = autodock@scripps.edu
+PACKAGE_NAME = autodock
+PACKAGE_STRING = autodock 4.2.2.1
+PACKAGE_TARNAME = autodock
+PACKAGE_VERSION = 4.2.2.1
+PATH_SEPARATOR = :
+RANLIB = ranlib
+SET_MAKE = 
+SHELL = /bin/sh
+STRIP = 
+VERSION = 4.2.2.1
+# abs_builddir = /bglhome/pkcoff/autodock/bgp/autodocksrc4221
+# abs_srcdir = /bglhome/pkcoff/autodock/bgp/autodocksrc4221
+# abs_top_builddir = /bglhome/pkcoff/autodock/bgp/autodocksrc4221
+# abs_top_srcdir = /bglhome/pkcoff/autodock/bgp/autodocksrc4221
+ac_ct_CC = ${SELECTED_CCOMPILER}
+ac_ct_CXX = ${SELECTED_CPPCOMPILER}
+am__include = include
+am__leading_dot = .
+am__quote = 
+am__tar = ${AMTAR} chof - "$$tardir"
+am__untar = ${AMTAR} xf -
+bindir = ${exec_prefix}/bin
+build = powerpc64-unknown-linux-gnu
+build_alias = 
+build_cpu = powerpc64
+build_os = linux-gnu
+build_vendor = unknown
+builddir = .
+datadir = ${datarootdir}
+datarootdir = ${prefix}/share
+docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
+dvidir = ${docdir}
+exec_prefix = ${prefix}
+host = powerpc64-unknown-linux-gnu
+host_alias = 
+host_cpu = powerpc64
+host_os = linux-gnu
+host_vendor = unknown
+htmldir = ${docdir}
+includedir = ${prefix}/include
+infodir = ${datarootdir}/info
+# install_sh = ${SHELL} /bglhome/pkcoff/autodock/bgp/autodocksrc4221/install-sh
+libdir = ${exec_prefix}/lib
+libexecdir = ${exec_prefix}/libexec
+localedir = ${datarootdir}/locale
+localstatedir = ${prefix}/var
+mandir = ${datarootdir}/man
+mkdir_p = /bin/mkdir -p
+oldincludedir = /usr/include
+pdfdir = ${docdir}
+prefix = /usr/local
+program_transform_name = s,x,x,
+psdir = ${docdir}
+sbindir = ${exec_prefix}/sbin
+sharedstatedir = ${prefix}/com
+
+#coliny.o : coliny.h
+#	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(ACRO_INCLUDES) -c coliny.cc -o coliny.o
+
+# see Autoconf manual 4.7.3 (p. 25) support for VPATH
+# enabling multi-platform builds
+srcdir = .
+sysconfdir = ${prefix}/etc
+target_alias = 
+top_build_prefix = 
+top_builddir = .
+top_srcdir = .
+EXTRA_DIST = AD4_PARM99.dat AD4_parameters.dat AD4.1_bound.dat AD4.1_extended.dat AD4.1_compact.dat paramdat2h.csh Tests
+
+# Define the AutoDock 4 source code files:
+autodock4_SOURCES = \
+    main.cc
+
+BUILT_SOURCES = main.cc default_parameters.h
+CLEANFILES = default_parameters.h
+noinst_LIBRARIES = libad.a
+libad_a_SOURCES = \
+    analysis.cc \
+	atom_parameter_manager.cc \
+    banner.cc \
+    bestpdb.cc \
+	calculateEnergies.cc \
+    call_glss.cc \
+    call_gs.cc \
+    call_ls.cc \
+    changeState.cc \
+    check_header_float.cc \
+    check_header_int.cc \
+    check_header_line.cc \
+    cluster_analysis.cc \
+    clmode.cc \
+    cnv_state_to_coords.cc \
+    com.cc \
+    conformation_sampler.cc \
+	distdepdiel.cc \
+    stateLibrary.cc \
+    readfield.cc \
+    readmap.cc \
+    readPDBQT.cc \
+	read_parameter_library.cc \
+    eval.cc \
+    gencau.cc \
+    getrms.cc \
+    get_atom_type.cc \
+    getInitialState.cc \
+    getpdbcrds.cc \
+    gs.cc \
+    initautodock.cc \
+    input_state.cc \
+    investigate.cc \
+    linpack.cc \
+    ls.cc \
+    mapping.cc \
+    minmeanmax.cc \
+    mkNewState.cc \
+    mkTorTree.cc \
+    mkRandomState.cc \
+    nonbonds.cc \
+    openfile.cc \
+    output_state.cc \
+    parse_dpf_line.cc \
+    parse_param_line.cc \
+    parse_PDBQT_line.cc \
+    parse_trj_line.cc \
+	parsetypes.cc \
+    print_2x.cc \
+    print_atomic_energies.cc \
+    print_avsfld.cc \
+    writePDBQT.cc \
+    print_rem.cc \
+    printdate.cc \
+    printEnergies.cc \
+    printhms.cc \
+    prClusterHist.cc \
+    prInitialState.cc \
+    prTorConList.cc \
+    qmultiply.cc \
+    qtransform.cc \
+    quicksort.cc \
+    ranlib.cc \
+    rep.cc \
+    scauchy.cc \
+    setflags.cc \
+    simanneal.cc \
+    sort_enrg.cc \
+    stack.cc \
+    stop.cc \
+    strindex.cc \
+    success.cc \
+    support.cc \
+    swap.cc \
+    timesys.cc \
+    timesyshms.cc \
+    torNorVec.cc \
+    torsion.cc \
+    trilinterp.cc \
+    usage.cc \
+    weedbonds.cc \
+    warn_bad_file.cc \
+    coliny.cc \
+    eintcal.cc \
+    eintcalPrint.cc \
+    intnbtable.cc \
+    nbe.cc \
+		PDBQT_tokens.h \
+		analysis.h \
+		atom_parameter_manager.h \
+		autocomm.h \
+		autoglobal.h \
+		banner.h \
+		bestpdb.h \
+		calculateEnergies.h \
+		call_glss.h \
+		call_gs.h \
+		call_ls.h \
+		changeState.h \
+		check_header_float.h \
+		check_header_int.h \
+		check_header_line.h \
+		clmode.h \
+		cluster_analysis.h \
+		cnv_state_to_coords.h \
+		coliny.h \
+		conformation_sampler.h \
+		constants.h \
+		default_parameters.h \
+		distdepdiel.h \
+		dpftoken.h \
+		eintcal.h \
+		eintcalPrint.h \
+		energy.h \
+		eval.h \
+		gencau.h \
+		getInitialState.h \
+		get_atom_type.h \
+		getpdbcrds.h \
+		getrms.h \
+		globals.h \
+		grid.h \
+		gs.h \
+		hybrids.h \
+		initautodock.h \
+		input_state.h \
+		intnbtable.h \
+		investigate.h \
+		ls.h \
+		main.h \
+		mdist.h \
+		mkNewState.h \
+		mkRandomState.h \
+		mkTorTree.h \
+		molstruct.h \
+		nbe.h \
+		nonbonds.h \
+		openfile.h \
+		output_state.h \
+		parameters.h \
+		parse_PDBQT_line.h \
+		parse_dpf_line.h \
+		parse_param_line.h \
+		parse_trj_line.h \
+		parsetypes.h \
+		partokens.h \
+		prClusterHist.h \
+		prInitialState.h \
+		prTorConList.h \
+		printEnergies.h \
+		print_2x.h \
+		print_atomic_energies.h \
+		print_avsfld.h \
+		print_rem.h \
+		printdate.h \
+		printhms.h \
+		qmultiply.h \
+		qtransform.h \
+		quicksort.h \
+		ranlib.h \
+		readPDBQT.h \
+		read_parameter_library.h \
+		readfield.h \
+		readmap.h \
+		rep.h \
+		rep_constants.h \
+		setflags.h \
+		simanneal.h \
+		sort_enrg.h \
+		stateLibrary.h \
+		stack.h \
+		stop.h \
+		strindex.h \
+		structs.h \
+		success.h \
+		support.h \
+		swap.h \
+		timesys.h \
+		timesyshms.h \
+		torNorVec.h \
+		torsion.h \
+		trilinterp.h \
+		trjtokens.h \
+		typedefs.h \
+		usage.h \
+		version.h \
+		warn_bad_file.h \
+		weedbonds.h \
+		writePDBQT.h
+
+AM_CPPFLAGS = -DNOSQRT \
+              -DUSE_8A_NBCUTOFF \
+              -DWRITEPDBQSTATE \
+              -I$(srcdir)/../macro/include -I/bgsys/drivers/ppcfloor/hwi/include -I/bgsys/drivers/ppcfloor/spi/include -I/bgsys/drivers/ppcfloor/firmware/include # Standard accuracy, but faster; no crossover in quaternion
+
+
+#autodock4_CPPFLAGS = -DUSE_8A_NBCUTOFF \
+#                     -DWRITEPDBQSTATE # Standard accuracy, but faster; no crossover in quaternion
+autodock4_LDADD = libad.a $(COLINY_LDFLAGS) -lm
+#autodock4_LDFLAGS = -Wl,--stack,8388608 # Cygwin, big stacksize
+all: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) all-am
+
+.SUFFIXES:
+.SUFFIXES: .cc .o .obj
+am--refresh:
+	@:
+$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
+	@for dep in $?; do \
+	  case '$(am__configure_deps)' in \
+	    *$$dep*) \
+	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu'; \
+	      $(am__cd) $(srcdir) && $(AUTOMAKE) --gnu \
+		&& exit 0; \
+	      exit 1;; \
+	  esac; \
+	done; \
+	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu Makefile'; \
+	$(am__cd) $(top_srcdir) && \
+	  $(AUTOMAKE) --gnu Makefile
+.PRECIOUS: Makefile
+Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
+	@case '$?' in \
+	  *config.status*) \
+	    echo ' $(SHELL) ./config.status'; \
+	    $(SHELL) ./config.status;; \
+	  *) \
+	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
+	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
+	esac;
+
+$(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
+	$(SHELL) ./config.status --recheck
+
+$(top_srcdir)/configure:  $(am__configure_deps)
+	$(am__cd) $(srcdir) && $(AUTOCONF)
+$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
+	$(am__cd) $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
+$(am__aclocal_m4_deps):
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+libad.a: $(libad_a_OBJECTS) $(libad_a_DEPENDENCIES) 
+	-rm -f libad.a
+	${EXPORTOBJMODE}
+	$(libad_a_AR) libad.a $(libad_a_OBJECTS) $(libad_a_LIBADD)
+	$(RANLIB) libad.a
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	test -z "$(bindir)" || $(MKDIR_P) "$(DESTDIR)$(bindir)"
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	for p in $$list; do echo "$$p $$p"; done | \
+	sed 's/$(EXEEXT)$$//' | \
+	while read p p1; do if test -f $$p; \
+	  then echo "$$p"; echo "$$p"; else :; fi; \
+	done | \
+	sed -e 'p;s,.*/,,;n;h' -e 's|.*|.|' \
+	    -e 'p;x;s,.*/,,;s/$(EXEEXT)$$//;$(transform);s/$$/$(EXEEXT)/' | \
+	sed 'N;N;N;s,\n, ,g' | \
+	$(AWK) 'BEGIN { files["."] = ""; dirs["."] = 1 } \
+	  { d=$$3; if (dirs[d] != 1) { print "d", d; dirs[d] = 1 } \
+	    if ($$2 == $$4) files[d] = files[d] " " $$1; \
+	    else { print "f", $$3 "/" $$4, $$1; } } \
+	  END { for (d in files) print "f", d, files[d] }' | \
+	while read type dir files; do \
+	    if test "$$dir" = .; then dir=; else dir=/$$dir; fi; \
+	    test -z "$$files" || { \
+	      echo " $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$files '$(DESTDIR)$(bindir)$$dir'"; \
+	      $(INSTALL_PROGRAM_ENV) $(INSTALL_PROGRAM) $$files "$(DESTDIR)$(bindir)$$dir" || exit $$?; \
+	    } \
+	; done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	@list='$(bin_PROGRAMS)'; test -n "$(bindir)" || list=; \
+	files=`for p in $$list; do echo "$$p"; done | \
+	  sed -e 'h;s,^.*/,,;s/$(EXEEXT)$$//;$(transform)' \
+	      -e 's/$$/$(EXEEXT)/' `; \
+	test -n "$$list" || exit 0; \
+	echo " ( cd '$(DESTDIR)$(bindir)' && rm -f" $$files ")"; \
+	cd "$(DESTDIR)$(bindir)" && rm -f $$files
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+${AUTODOCK_EXEC_NAME}$(EXEEXT): $(autodock4_OBJECTS) $(autodock4_DEPENDENCIES) 
+	@rm -f autodock4$(EXEEXT)
+	$(autodock4_LINK) $(autodock4_OBJECTS) $(autodock4_LDADD) $(LIBS)
+
+mostlyclean-compile:
+	-rm -f *.$(OBJEXT)
+
+distclean-compile:
+	-rm -f *.tab.c
+
+include ./$(DEPDIR)/analysis.Po
+include ./$(DEPDIR)/atom_parameter_manager.Po
+include ./$(DEPDIR)/banner.Po
+include ./$(DEPDIR)/bestpdb.Po
+include ./$(DEPDIR)/calculateEnergies.Po
+include ./$(DEPDIR)/call_glss.Po
+include ./$(DEPDIR)/call_gs.Po
+include ./$(DEPDIR)/call_ls.Po
+include ./$(DEPDIR)/changeState.Po
+include ./$(DEPDIR)/check_header_float.Po
+include ./$(DEPDIR)/check_header_int.Po
+include ./$(DEPDIR)/check_header_line.Po
+include ./$(DEPDIR)/clmode.Po
+include ./$(DEPDIR)/cluster_analysis.Po
+include ./$(DEPDIR)/cnv_state_to_coords.Po
+include ./$(DEPDIR)/coliny.Po
+include ./$(DEPDIR)/com.Po
+include ./$(DEPDIR)/conformation_sampler.Po
+include ./$(DEPDIR)/distdepdiel.Po
+include ./$(DEPDIR)/eintcal.Po
+include ./$(DEPDIR)/eintcalPrint.Po
+include ./$(DEPDIR)/eval.Po
+include ./$(DEPDIR)/gencau.Po
+include ./$(DEPDIR)/getInitialState.Po
+include ./$(DEPDIR)/get_atom_type.Po
+include ./$(DEPDIR)/getpdbcrds.Po
+include ./$(DEPDIR)/getrms.Po
+include ./$(DEPDIR)/gs.Po
+include ./$(DEPDIR)/initautodock.Po
+include ./$(DEPDIR)/input_state.Po
+include ./$(DEPDIR)/intnbtable.Po
+include ./$(DEPDIR)/investigate.Po
+include ./$(DEPDIR)/linpack.Po
+include ./$(DEPDIR)/ls.Po
+include ./$(DEPDIR)/main.Po
+include ./$(DEPDIR)/mapping.Po
+include ./$(DEPDIR)/minmeanmax.Po
+include ./$(DEPDIR)/mkNewState.Po
+include ./$(DEPDIR)/mkRandomState.Po
+include ./$(DEPDIR)/mkTorTree.Po
+include ./$(DEPDIR)/nbe.Po
+include ./$(DEPDIR)/nonbonds.Po
+include ./$(DEPDIR)/openfile.Po
+include ./$(DEPDIR)/output_state.Po
+include ./$(DEPDIR)/parse_PDBQT_line.Po
+include ./$(DEPDIR)/parse_dpf_line.Po
+include ./$(DEPDIR)/parse_param_line.Po
+include ./$(DEPDIR)/parse_trj_line.Po
+include ./$(DEPDIR)/parsetypes.Po
+include ./$(DEPDIR)/prClusterHist.Po
+include ./$(DEPDIR)/prInitialState.Po
+include ./$(DEPDIR)/prTorConList.Po
+include ./$(DEPDIR)/printEnergies.Po
+include ./$(DEPDIR)/print_2x.Po
+include ./$(DEPDIR)/print_atomic_energies.Po
+include ./$(DEPDIR)/print_avsfld.Po
+include ./$(DEPDIR)/print_rem.Po
+include ./$(DEPDIR)/printdate.Po
+include ./$(DEPDIR)/printhms.Po
+include ./$(DEPDIR)/qmultiply.Po
+include ./$(DEPDIR)/qtransform.Po
+include ./$(DEPDIR)/quicksort.Po
+include ./$(DEPDIR)/ranlib.Po
+include ./$(DEPDIR)/readPDBQT.Po
+include ./$(DEPDIR)/read_parameter_library.Po
+include ./$(DEPDIR)/readfield.Po
+include ./$(DEPDIR)/readmap.Po
+include ./$(DEPDIR)/rep.Po
+include ./$(DEPDIR)/scauchy.Po
+include ./$(DEPDIR)/setflags.Po
+include ./$(DEPDIR)/simanneal.Po
+include ./$(DEPDIR)/sort_enrg.Po
+include ./$(DEPDIR)/stack.Po
+include ./$(DEPDIR)/stateLibrary.Po
+include ./$(DEPDIR)/stop.Po
+include ./$(DEPDIR)/strindex.Po
+include ./$(DEPDIR)/success.Po
+include ./$(DEPDIR)/support.Po
+include ./$(DEPDIR)/swap.Po
+include ./$(DEPDIR)/timesys.Po
+include ./$(DEPDIR)/timesyshms.Po
+include ./$(DEPDIR)/torNorVec.Po
+include ./$(DEPDIR)/torsion.Po
+include ./$(DEPDIR)/trilinterp.Po
+include ./$(DEPDIR)/usage.Po
+include ./$(DEPDIR)/warn_bad_file.Po
+include ./$(DEPDIR)/weedbonds.Po
+include ./$(DEPDIR)/writePDBQT.Po
+
+.cc.o:
+	$(CXXCOMPILE) -c -o $@ $<
+#	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ $<
+
+.cc.obj:
+	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+#	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
+#	source='$<' object='$@' libtool=no \
+#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
+#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
+
+ID: $(HEADERS) $(SOURCES) $(LISP) $(TAGS_FILES)
+	list='$(SOURCES) $(HEADERS) $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	mkid -fID $$unique
+tags: TAGS
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	set x; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	shift; \
+	if test -z "$(ETAGS_ARGS)$$*$$unique"; then :; else \
+	  test -n "$$unique" || unique=$$empty_fix; \
+	  if test $$# -gt 0; then \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      "$$@" $$unique; \
+	  else \
+	    $(ETAGS) $(ETAGSFLAGS) $(AM_ETAGSFLAGS) $(ETAGS_ARGS) \
+	      $$unique; \
+	  fi; \
+	fi
+ctags: CTAGS
+CTAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) \
+		$(TAGS_FILES) $(LISP)
+	list='$(SOURCES) $(HEADERS)  $(LISP) $(TAGS_FILES)'; \
+	unique=`for i in $$list; do \
+	    if test -f "$$i"; then echo $$i; else echo $(srcdir)/$$i; fi; \
+	  done | \
+	  $(AWK) '{ files[$$0] = 1; nonempty = 1; } \
+	      END { if (nonempty) { for (i in files) print i; }; }'`; \
+	test -z "$(CTAGS_ARGS)$$unique" \
+	  || $(CTAGS) $(CTAGSFLAGS) $(AM_CTAGSFLAGS) $(CTAGS_ARGS) \
+	     $$unique
+
+GTAGS:
+	here=`$(am__cd) $(top_builddir) && pwd` \
+	  && $(am__cd) $(top_srcdir) \
+	  && gtags -i $(GTAGS_ARGS) "$$here"
+
+distclean-tags:
+	-rm -f TAGS ID GTAGS GRTAGS GSYMS GPATH tags
+
+distdir: $(DISTFILES)
+	$(am__remove_distdir)
+	test -d "$(distdir)" || mkdir "$(distdir)"
+	@srcdirstrip=`echo "$(srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
+	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's/[].[^$$\\*]/\\\\&/g'`; \
+	list='$(DISTFILES)'; \
+	  dist_files=`for file in $$list; do echo $$file; done | \
+	  sed -e "s|^$$srcdirstrip/||;t" \
+	      -e "s|^$$topsrcdirstrip/|$(top_builddir)/|;t"`; \
+	case $$dist_files in \
+	  */*) $(MKDIR_P) `echo "$$dist_files" | \
+			   sed '/\//!d;s|^|$(distdir)/|;s,/[^/]*$$,,' | \
+			   sort -u` ;; \
+	esac; \
+	for file in $$dist_files; do \
+	  if test -f $$file || test -d $$file; then d=.; else d=$(srcdir); fi; \
+	  if test -d $$d/$$file; then \
+	    dir=`echo "/$$file" | sed -e 's,/[^/]*$$,,'`; \
+	    if test -d "$(distdir)/$$file"; then \
+	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+	    fi; \
+	    if test -d $(srcdir)/$$file && test $$d != $(srcdir); then \
+	      cp -fpR $(srcdir)/$$file "$(distdir)$$dir" || exit 1; \
+	      find "$(distdir)/$$file" -type d ! -perm -700 -exec chmod u+rwx {} \;; \
+	    fi; \
+	    cp -fpR $$d/$$file "$(distdir)$$dir" || exit 1; \
+	  else \
+	    test -f "$(distdir)/$$file" \
+	    || cp -p $$d/$$file "$(distdir)/$$file" \
+	    || exit 1; \
+	  fi; \
+	done
+	$(MAKE) $(AM_MAKEFLAGS) \
+	  top_distdir="$(top_distdir)" distdir="$(distdir)" \
+	  dist-hook
+	-test -n "$(am__skip_mode_fix)" \
+	|| find "$(distdir)" -type d ! -perm -777 -exec chmod a+rwx {} \; -o \
+	  ! -type d ! -perm -444 -links 1 -exec chmod a+r {} \; -o \
+	  ! -type d ! -perm -400 -exec chmod a+r {} \; -o \
+	  ! -type d ! -perm -444 -exec $(install_sh) -c -m a+r {} {} \; \
+	|| chmod -R a+r "$(distdir)"
+dist-gzip: distdir
+	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	$(am__remove_distdir)
+
+dist-bzip2: distdir
+	tardir=$(distdir) && $(am__tar) | bzip2 -9 -c >$(distdir).tar.bz2
+	$(am__remove_distdir)
+
+dist-lzma: distdir
+	tardir=$(distdir) && $(am__tar) | lzma -9 -c >$(distdir).tar.lzma
+	$(am__remove_distdir)
+
+dist-xz: distdir
+	tardir=$(distdir) && $(am__tar) | xz -c >$(distdir).tar.xz
+	$(am__remove_distdir)
+
+dist-tarZ: distdir
+	tardir=$(distdir) && $(am__tar) | compress -c >$(distdir).tar.Z
+	$(am__remove_distdir)
+
+dist-shar: distdir
+	shar $(distdir) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).shar.gz
+	$(am__remove_distdir)
+
+dist-zip: distdir
+	-rm -f $(distdir).zip
+	zip -rq $(distdir).zip $(distdir)
+	$(am__remove_distdir)
+
+dist dist-all: distdir
+	tardir=$(distdir) && $(am__tar) | GZIP=$(GZIP_ENV) gzip -c >$(distdir).tar.gz
+	$(am__remove_distdir)
+
+# This target untars the dist file and tries a VPATH configuration.  Then
+# it guarantees that the distribution is self-contained by making another
+# tarfile.
+distcheck: dist
+	case '$(DIST_ARCHIVES)' in \
+	*.tar.gz*) \
+	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).tar.gz | $(am__untar) ;;\
+	*.tar.bz2*) \
+	  bunzip2 -c $(distdir).tar.bz2 | $(am__untar) ;;\
+	*.tar.lzma*) \
+	  unlzma -c $(distdir).tar.lzma | $(am__untar) ;;\
+	*.tar.xz*) \
+	  xz -dc $(distdir).tar.xz | $(am__untar) ;;\
+	*.tar.Z*) \
+	  uncompress -c $(distdir).tar.Z | $(am__untar) ;;\
+	*.shar.gz*) \
+	  GZIP=$(GZIP_ENV) gunzip -c $(distdir).shar.gz | unshar ;;\
+	*.zip*) \
+	  unzip $(distdir).zip ;;\
+	esac
+	chmod -R a-w $(distdir); chmod a+w $(distdir)
+	mkdir $(distdir)/_build
+	mkdir $(distdir)/_inst
+	chmod a-w $(distdir)
+	test -d $(distdir)/_build || exit 0; \
+	dc_install_base=`$(am__cd) $(distdir)/_inst && pwd | sed -e 's,^[^:\\/]:[\\/],/,'` \
+	  && dc_destdir="$${TMPDIR-/tmp}/am-dc-$$$$/" \
+	  && am__cwd=`pwd` \
+	  && $(am__cd) $(distdir)/_build \
+	  && ../configure --srcdir=.. --prefix="$$dc_install_base" \
+	    $(DISTCHECK_CONFIGURE_FLAGS) \
+	  && $(MAKE) $(AM_MAKEFLAGS) \
+	  && $(MAKE) $(AM_MAKEFLAGS) dvi \
+	  && $(MAKE) $(AM_MAKEFLAGS) check \
+	  && $(MAKE) $(AM_MAKEFLAGS) install \
+	  && $(MAKE) $(AM_MAKEFLAGS) installcheck \
+	  && $(MAKE) $(AM_MAKEFLAGS) uninstall \
+	  && $(MAKE) $(AM_MAKEFLAGS) distuninstallcheck_dir="$$dc_install_base" \
+	        distuninstallcheck \
+	  && chmod -R a-w "$$dc_install_base" \
+	  && ({ \
+	       (cd ../.. && umask 077 && mkdir "$$dc_destdir") \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" install \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" uninstall \
+	       && $(MAKE) $(AM_MAKEFLAGS) DESTDIR="$$dc_destdir" \
+	            distuninstallcheck_dir="$$dc_destdir" distuninstallcheck; \
+	      } || { rm -rf "$$dc_destdir"; exit 1; }) \
+	  && rm -rf "$$dc_destdir" \
+	  && $(MAKE) $(AM_MAKEFLAGS) dist \
+	  && rm -rf $(DIST_ARCHIVES) \
+	  && $(MAKE) $(AM_MAKEFLAGS) distcleancheck \
+	  && cd "$$am__cwd" \
+	  || exit 1
+	$(am__remove_distdir)
+	@(echo "$(distdir) archives ready for distribution: "; \
+	  list='$(DIST_ARCHIVES)'; for i in $$list; do echo $$i; done) | \
+	  sed -e 1h -e 1s/./=/g -e 1p -e 1x -e '$$p' -e '$$x'
+distuninstallcheck:
+	@$(am__cd) '$(distuninstallcheck_dir)' \
+	&& test `$(distuninstallcheck_listfiles) | wc -l` -le 1 \
+	   || { echo "ERROR: files left after uninstall:" ; \
+	        if test -n "$(DESTDIR)"; then \
+	          echo "  (check DESTDIR support)"; \
+	        fi ; \
+	        $(distuninstallcheck_listfiles) ; \
+	        exit 1; } >&2
+distcleancheck: distclean
+	@if test '$(srcdir)' = . ; then \
+	  echo "ERROR: distcleancheck can only run from a VPATH build" ; \
+	  exit 1 ; \
+	fi
+	@test `$(distcleancheck_listfiles) | wc -l` -eq 0 \
+	  || { echo "ERROR: files left in build directory after distclean:" ; \
+	       $(distcleancheck_listfiles) ; \
+	       exit 1; } >&2
+check-am: all-am
+check: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) check-am
+all-am: Makefile $(LIBRARIES) $(PROGRAMS)
+installdirs:
+	for dir in "$(DESTDIR)$(bindir)"; do \
+	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
+	done
+install: $(BUILT_SOURCES)
+	$(MAKE) $(AM_MAKEFLAGS) install-am
+install-exec: install-exec-am
+install-data: install-data-am
+uninstall: uninstall-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+
+installcheck: installcheck-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_PROGRAM="$(INSTALL_STRIP_PROGRAM)" \
+	  install_sh_PROGRAM="$(INSTALL_STRIP_PROGRAM)" INSTALL_STRIP_FLAG=-s \
+	  `test -z '$(STRIP)' || \
+	    echo "INSTALL_PROGRAM_ENV=STRIPPROG='$(STRIP)'"` install
+mostlyclean-generic:
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
+	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+
+maintainer-clean-generic:
+	@echo "This command is intended for maintainers to use"
+	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(BUILT_SOURCES)" || rm -f $(BUILT_SOURCES)
+clean: clean-am
+
+clean-am: clean-binPROGRAMS clean-generic clean-noinstLIBRARIES \
+	mostlyclean-am
+
+distclean: distclean-am
+	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+	-rm -rf ./$(DEPDIR)
+	-rm -f Makefile
+distclean-am: clean-am distclean-compile distclean-generic \
+	distclean-tags
+
+dvi: dvi-am
+
+dvi-am:
+
+html: html-am
+
+html-am:
+
+info: info-am
+
+info-am:
+
+install-data-am:
+
+install-dvi: install-dvi-am
+
+install-dvi-am:
+
+install-exec-am: install-binPROGRAMS
+
+install-html: install-html-am
+
+install-html-am:
+
+install-info: install-info-am
+
+install-info-am:
+
+install-man:
+
+install-pdf: install-pdf-am
+
+install-pdf-am:
+
+install-ps: install-ps-am
+
+install-ps-am:
+
+installcheck-am:
+
+maintainer-clean: maintainer-clean-am
+	-rm -f $(am__CONFIG_DISTCLEAN_FILES)
+	-rm -rf $(top_srcdir)/autom4te.cache
+	-rm -rf ./$(DEPDIR)
+	-rm -f Makefile
+maintainer-clean-am: distclean-am maintainer-clean-generic
+
+mostlyclean: mostlyclean-am
+
+mostlyclean-am: mostlyclean-compile mostlyclean-generic
+
+pdf: pdf-am
+
+pdf-am:
+
+ps: ps-am
+
+ps-am:
+
+uninstall-am: uninstall-binPROGRAMS
+
+.MAKE: all check install install-am install-strip
+
+.PHONY: CTAGS GTAGS all all-am am--refresh check check-am clean \
+	clean-binPROGRAMS clean-generic clean-noinstLIBRARIES ctags \
+	dist dist-all dist-bzip2 dist-gzip dist-hook dist-lzma \
+	dist-shar dist-tarZ dist-xz dist-zip distcheck distclean \
+	distclean-compile distclean-generic distclean-tags \
+	distcleancheck distdir distuninstallcheck dvi dvi-am html \
+	html-am info info-am install install-am install-binPROGRAMS \
+	install-data install-data-am install-dvi install-dvi-am \
+	install-exec install-exec-am install-html install-html-am \
+	install-info install-info-am install-man install-pdf \
+	install-pdf-am install-ps install-ps-am install-strip \
+	installcheck installcheck-am installdirs maintainer-clean \
+	maintainer-clean-generic mostlyclean mostlyclean-compile \
+	mostlyclean-generic pdf pdf-am ps ps-am tags uninstall \
+	uninstall-am uninstall-binPROGRAMS
+
+
+dist-hook:
+	rm -rf `find $(distdir)/Tests -name CVS -o -name '*.dlg'` 
+
+    # if gnu c++ compiler
+
+#
+# Object dependencies:
+#
+
+gs.o : gs.cc gs.h ranlib.h eval.h rep.h support.h writePDBQT.h
+	$(CXXCOMPILE) -DCHECK_ISNAN -c $(srcdir)/gs.cc
+
+### main.o : main.cc hybrids.h ranlib.h gs.h ls.h rep.h support.h main.h constants.h autocomm.h dpftoken.h structs.h autoglobal.h  autocomm.h coliny.h parse_param_line.cc partokens.h eintcalPrint.cc eintcalPrint.h eintcal.cc atom_parameter_manager.cc atom_parameter_manager.h read_parameter_library.h calculateEnergies.cc calculateEnergies.h
+### $(CXXCOMPILE) $(ACRO_INCLUDES) -c main.cc
+
+# 2007-04-30 MP & GMM: this line is necessary to be able to compile read_parameter_library.o
+read_parameter_library.o : default_parameters.h
+
+default_parameters.h : AD4_parameters.dat AD4.1_bound.dat paramdat2h.csh
+	rm -f $@
+	csh $(srcdir)/paramdat2h.csh $(srcdir)/AD4_parameters.dat $(srcdir)/AD4.1_bound.dat > $@
+
+#
+# EOF
+#
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

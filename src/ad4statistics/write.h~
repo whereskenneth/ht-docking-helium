@@ -1,0 +1,10 @@
+
+
+
+
+
+
+
+void get_old_data(std::vector<std::string> previous_data, std::vector<float>* old_energies, std::vector<int>* old_bins);
+
+void write_to_output(std::string OutputFile, std::vector<float> energy_levels, std::vector<int> bins);

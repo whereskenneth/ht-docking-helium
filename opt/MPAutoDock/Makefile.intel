@@ -1,0 +1,57 @@
+# This Makefile builds the 4 permutations of autodock 4.2 on linux using the intel compilers
+
+# autodock-intel-omp-mpi --- This is the hybrid-parallelization version using MPI and OpenMP built with the intel compiler
+# autodock-intel-omp-nompi --- This is the OpenMP-only parallelization version for doing just 1 docking built with the intel compiler
+# autodock-intel-serial-mpi --- This is the MPI-only parallelization version for doing multiple dockings but using only 1 thread built with the intel compiler
+# autodock-intel-serial-nompi --- This is the completely serial version for doing just 1 docking using 1 thread built with the intel compiler
+
+# This Makefile is designed to build just 1 version at a time since the same object file names are used for all targets
+
+autodock-intel-omp-mpi: cleanintelompmpi autodock4-intel-omp-mpi
+
+autodock-intel-serial-nompi: cleanintelserialnompi autodock4-intel-serial-nompi
+
+autodock-intel-omp-nompi: cleanintelompmpi autodock4-intel-omp-nompi
+
+autodock-intel-serial-mpi: cleanintelserialmpi autodock4-intel-serial-mpi
+
+cleanintelserialnompi:
+	touch dummy.o
+	rm *.o
+	touch autodock-intel-serial-nompi
+	rm -rf autodock-intel-serial-nompi
+	
+cleanintelompnompi:
+	touch dummy.o
+	rm *.o
+	touch autodock-intel-omp-nompi
+	rm -rf autodock-intel-omp-nompi
+
+cleanintelserialmpi:
+	touch dummy.o
+	rm *.o
+	touch autodock-intel-serial-mpi
+	rm -rf autodock-intel-serial-mpi
+
+cleanintelompmpi:
+	touch dummy.o
+	rm *.o
+	touch autodock-intel-omp-mpi
+	rm -rf autodock-intel-omp-mpi
+
+autodock4-intel-serial-nompi:	
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=24 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/hpcc/intel/Compiler/11.1/075/bin/intel64/icpc' SELECTED_CPPCOMPILER='/hpcc/intel/Compiler/11.1/075/bin/intel64/icpc' AR='/usr/bin/ar' AM_CXXFLAGS='-O3 -fp-model strict'  AUTODOCK_EXEC_NAME=autodock4-intel-serial-nompi autodock4-intel-serial-nompi
+	mv autodock4-intel-serial-nompi autodock-intel-serial-nompi
+
+autodock4-intel-omp-nompi:	
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=24 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/hpcc/intel/Compiler/11.1/075/bin/intel64/icpc' SELECTED_CPPCOMPILER='/hpcc/intel/Compiler/11.1/075/bin/intel64/icpc' AR='/usr/bin/ar' AM_CXXFLAGS='-O3 -fp-model strict -openmp' AUTODOCK_EXEC_NAME=autodock4-intel-omp-nompi autodock4-intel-omp-nompi
+	mv autodock4-intel-omp-nompi autodock-intel-omp-nompi
+
+
+autodock4-intel-omp-mpi:
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=8 -DPERF_PROFILING=1 -DAUTODOCK_MPI=1 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='mpicc' SELECTED_CPPCOMPILER='mpicxx' AR='/usr/bin/ar' AM_CXXFLAGS='-O3 -fp-model strict -openmp -mt_mpi' AUTODOCK_EXEC_NAME=autodock4-intel-omp-mpi autodock4-intel-omp-mpi
+	mv autodock4-intel-omp-mpi autodock-intel-omp-mpi
+
+autodock4-intel-serial-mpi:
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=24 -DPERF_PROFILING=1 -DAUTODOCK_MPI=1 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='mpicc' SELECTED_CPPCOMPILER='mpicxx' AR='/usr/bin/ar' AM_CXXFLAGS='-O3 -fp-model strict' AUTODOCK_EXEC_NAME=autodock4-intel-serial-mpi autodock4-intel-serial-mpi
+	mv autodock4-intel-serial-mpi autodock-intel-serial-mpi

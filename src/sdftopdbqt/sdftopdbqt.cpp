@@ -1,0 +1,159 @@
+#include <iostream>
+#include <stdlib.h>
+#include <vector>
+#include <string>
+#include <stdio.h>
+#include <time.h>
+
+#include <openbabel/obconversion.h>
+#include <openbabel/mol.h>
+#include <openbabel/descriptor.h>
+#include <openbabel/generic.h>
+#include <boost/program_options.hpp>
+namespace po=boost::program_options;
+
+
+
+void archive_and_compress(std::string output_prefix, int archive_counter) {
+
+
+	std::stringstream ac;
+	ac << archive_counter;
+
+	std::string archive_name(output_prefix + "-" + ac.str() + ".tar");
+	std::string archive_string("tar -cf " + archive_name + " *.pdbqt --remove-files");
+	std::cout << "Building archive " << archive_name << std::endl;	
+
+	std::system(archive_string.c_str());
+			
+	std::string compress_string("gzip -9 " + archive_name);
+
+	std::cout << "Compressing " << archive_name << std::endl;
+	std::system(compress_string.c_str());
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+int main(int argc, char* argv[]) {
+
+
+	po::options_description desc("Options:");
+	desc.add_options()
+		("help,h", "Produce this message")
+		("input,i", po::value< std::string >(), "Input sdf file for converting to pdbqt")
+		("output,o", po::value< std::string >(), "Prefix for pdbqt archives")
+		("size,s", po::value<int>()->default_value(100000), "Number of pdbqt files per tar archive")
+	;
+
+	po::variables_map vm;
+	po::store(po::parse_command_line(argc,argv,desc), vm);
+	po::notify(vm);
+
+	std::string input_filename;
+	std::string output_prefix;
+	unsigned int archive_size;
+	
+	if (vm.count("help")) {
+
+		std::cout << desc << std::endl;
+
+		printf("This program takes an sdf file, and creates an archive of pdbqt files of size specified. This pdbqt archive can then be used for the dpf4 script when ready for docking. A custom python script will be created to launch dpf4 jobs across multiple processors, but this is still in works as of 6/6/2012.");
+
+	}
+
+	if (vm.count("input")) {
+
+		input_filename=vm["input"].as<std::string>();
+	}	
+	else {
+
+		std::cout << desc << std::endl;
+		std::cout << "No input file!" << std::endl;
+		return 1;
+	}
+	
+		
+	if (vm.count("output")) {
+		
+		output_prefix=vm["output"].as<std::string>();
+	}
+	else {
+		
+		std::cout << desc << std::endl;
+		std::cout << "No output prefix given!" << std::endl;
+		return 1;
+	}
+
+
+	archive_size=vm["size"].as<int>();
+	
+	OpenBabel::OBConversion obconversion;	
+	OpenBabel::OBMol mol;
+	std::string output_suffix="pdbqt";
+
+	obconversion.SetInFormat("sdf");
+	obconversion.SetOutFormat(output_suffix.c_str());
+
+	bool notatend = obconversion.ReadFile(&mol,input_filename);
+
+	
+
+  int molcounter =0;
+	int archive_counter=0;
+
+	while (notatend) 
+	{
+
+		//std::cout << "Title: " << mol.GetTitle() << std::endl;
+		
+		std::string title_name(mol.GetTitle());
+
+
+		std::string filename=title_name + '.' + output_suffix;
+		std::ofstream ofs(filename.c_str());
+  	obconversion.SetOutStream(&ofs);
+
+
+		obconversion.Write(&mol);
+
+		molcounter+=1;
+	
+		if (molcounter%archive_size == 0) {
+
+			archive_and_compress(output_prefix,archive_counter);
+			archive_counter++;
+
+		}
+
+
+
+		notatend = obconversion.Read(&mol);
+
+
+
+	}
+
+
+	archive_and_compress(output_prefix,archive_counter);
+
+
+
+	return 0;
+
+}
+		
+
+
+	

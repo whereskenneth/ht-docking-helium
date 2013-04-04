@@ -1,0 +1,63 @@
+include ../../../Make.rules
+include ../../sst/Make.rules
+
+autodock-bgq-omp-nompi-xl: cleanbgqnompixl autodock4-bgq-omp-nompi-xl
+
+autodock-bgq-omp-mpi-xl: cleanbgqmpixl autodock4-bgq-omp-mpi-xl
+
+autodock-bgq-omp-nompi-toolchain: cleanbgqnompitoolchain autodock4-bgq-omp-nompi-toolchain
+
+autodock-bgq-omp-mpi-toolchain: cleanbgqmpitoolchain autodock4-bgq-omp-mpi-toolchain
+
+autodock-bgq-noomp-mpi-toolchain: cleanbgqmpitoolchain autodock4-bgq-noomp-mpi-toolchain
+
+cleanbgqnompixl:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-nompi-xl
+	rm -rf autodock4-bgq-omp-nompi-xl
+
+cleanbgqmpixl:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-mpi-xl
+	rm -rf autodock4-bgq-omp-mpi-xl
+
+cleanbgqnompitoolchain:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-nompi-toolchain
+	rm -rf autodock4-bgq-omp-nompi-toolchain
+
+cleanbgqmpitoolchain:
+	touch dummy.o
+	rm *.o
+	touch autodock4-bgq-omp-mpi-toolchain
+	rm -rf autodock4-bgq-omp-mpi-toolchain
+	touch autodock4-bgq-noomp-mpi-toolchain
+	rm -rf autodock4-bgq-noomp-mpi-toolchain
+
+
+autodock4-bgq-omp-nompi-xl:
+	export MPICH_CC=/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlC_r
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=16 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlc_r' SELECTED_CPPCOMPILER='/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlC_r' AM_CXXFLAGS='-O3 -qsmp=omp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-nompi-xl CXX='${XLCXX_R}' autodock4-bgq-omp-nompi-xl
+	mv autodock4-bgq-omp-nompi-xl autodock-bgq-omp-nompi-xl
+	unset MPICH_CC
+
+autodock4-bgq-omp-mpi-xl:
+	export MPICH_CC=/gsa/rchgsa/projects/x/xlcmpbld/run/vacpp/dev/bgq/daily/latest/bin/bgxlC_r
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=16 -DAUTODOCK_MPI=1 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/bgsys/drivers/ppcfloor/comm/xl/bin/mpixlc_r' SELECTED_CPPCOMPILER='/bgsys/drivers/ppcfloor/comm/xl/bin/mpixlcxx_r' AM_CXXFLAGS='-O3 -qsmp=omp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-mpi-xl CXX='/bgsys/drivers/ppcfloor/comm/xl/bin/mpixlcxx_r' autodock4-bgq-omp-mpi-xl
+	mv autodock4-bgq-omp-nompi-toolchain autodock-bgq-omp-nompi-toolchain
+	unset MPICH_CC
+
+autodock4-bgq-omp-nompi-toolchain:
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=16 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/bgsys/drivers/ppcfloor/gnu-linux/bin/powerpc64-bgq-linux-g++' SELECTED_CPPCOMPILER='/bgsys/drivers/ppcfloor/gnu-linux/bin/powerpc64-bgq-linux-g++' AM_CXXFLAGS='-O3 -fopenmp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-nompi-toolchain CXX='${BGQ_CROSS_CXX}' autodock4-bgq-omp-nompi-toolchain
+	mv autodock4-bgq-omp-nompi-toolchain autodock-bgq-omp-nompi-toolchain
+
+autodock4-bgq-omp-mpi-toolchain:
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=16 -DAUTODOCK_MPI=1 -DBGQ_NODE_VERIFICATION=1 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' SELECTED_CPPCOMPILER='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' AM_CXXFLAGS='-O3 -fopenmp' AUTODOCK_EXEC_NAME=autodock4-bgq-omp-mpi-toolchain CXX='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' autodock4-bgq-omp-mpi-toolchain
+	mv autodock4-bgq-omp-mpi-toolchain autodock-bgq-omp-mpi-toolchain
+
+autodock4-bgq-noomp-mpi-toolchain:
+	make -f Makefile.base DEFS='-DMAX_NUM_THREADS=1 -DAUTODOCK_MPI=1 -DBGQ_NODE_VERIFICATION=1 -DPACKAGE_NAME=\"autodock\" -DPACKAGE_TARNAME=\"autodock\" -DPACKAGE_VERSION=\"4.2.2.1\" -DPACKAGE_STRING=\"autodock\ 4.2.2.1\" -DPACKAGE_BUGREPORT=\"autodock@scripps.edu\" -DPACKAGE=\"autodock\" -DVERSION=\"4.2.2.1\" -DSTDC_HEADERS=1 -DHAVE_SYS_TYPES_H=1 -DHAVE_SYS_STAT_H=1 -DHAVE_STDLIB_H=1 -DHAVE_STRING_H=1 -DHAVE_MEMORY_H=1 -DHAVE_STRINGS_H=1 -DHAVE_INTTYPES_H=1 -DHAVE_STDINT_H=1 -DHAVE_UNISTD_H=1 -DHAVE__BOOL=1 -DHAVE_STDLIB_H=1 -DHAVE_MALLOC=1 -DHAVE_GETHOSTNAME=1 -DHAVE_POW=1 -DHAVE_SQRT=1 -DHAVE_STRNCASECMP=1' SELECTED_CCOMPILER='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' SELECTED_CPPCOMPILER='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' AM_CXXFLAGS='-O3' AUTODOCK_EXEC_NAME=autodock4-bgq-noomp-mpi-toolchain CXX='/bgsys/drivers/ppcfloor/comm/gcc/bin/mpic++' autodock4-bgq-noomp-mpi-toolchain
+	mv autodock4-bgq-noomp-mpi-toolchain autodock-bgq-noomp-mpi-toolchain
