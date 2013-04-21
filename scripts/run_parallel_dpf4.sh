@@ -14,6 +14,9 @@ ga_pop_size=150
 ga_runs=1
 sge_queue_custom=AS
 
+source /opt/modules/Modules/3.2.7/init/sh
+source /Groups/AS/ht-docking-helium/env/.chemenv.bashrc
+
 
 T="$(date +%s)"
 # Need to know how many ligands we will be dealing with

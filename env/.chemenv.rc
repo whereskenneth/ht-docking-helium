@@ -1,0 +1,24 @@
+#!/bin/bash
+
+export SHARED_ROOT=/Groups/AS
+
+module load python_2.6.4 
+module load intel
+
+export PATH=$SHARED_ROOT/usr/bin:${SHARED_ROOT}/bin:$PATH
+export PS1="[bash-\u@\h \W]\\$ "
+
+export PYTHONPATH=$PYTHONPATH:$SHARED_ROOT/usr/openbabel/lib/python2.6/site-packages:/opt/Python-2.6.4/lib/python2.6/site-packages:$SHARED_ROOT/usr/lib
+
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/intel/mkl/10.2.5.035/lib/em64t
+alias qstat='qstat -q AS'
+
+
+#################################
+#Openbabel variables
+
+export LD_LIBRARY_PATH=$SHARED_ROOT/usr/lib:$LD_LIBRARY_PATH
+export C_INCLUDE_PATH=$SHARED_ROOT/usr/include:$C_INCLUDE_PATH
+export CPP_INCLUDE_PATH=$SHARED_ROOT/usr/include:$CPP_INCLUDE_PATH
+
+
