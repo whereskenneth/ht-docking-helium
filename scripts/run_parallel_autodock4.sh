@@ -9,7 +9,7 @@ let overheard_time=0
 let docking_time=0
 let total_ligands=0
 let log_indicator=$RANDOM
-let counter=0
+let counter=1
 
 
 
