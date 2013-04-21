@@ -1,6 +1,6 @@
 CC = g++
 CFLAGS = -c
-LDFLAGS = -L/Users/ktussey/usr/local/lib -lopenbabel -lboost_program_options -I/Users/ktussey/usr/local/include
+LDFLAGS = -L${SHARED_ROOT}/usr/lib -lopenbabel -lboost_program_options -I${SHARED_ROOT}/usr/include
 GFLAGS=
 
 all: sdftopdbqt
