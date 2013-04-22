@@ -163,18 +163,12 @@ void process_and_convert(std::vector<std::vector<std::string> > pdbqt_file_array
     
 
     obconversion.Write(&mol);  
-    std::cout << output.str(); 
+    //std::cout << output.str(); 
    
     std::cout.flush();
     pdbqt_stream.flush();
   }
 }
-
-
-
-
-
-
 
 
 
@@ -253,27 +247,25 @@ int parse_dlg(std::vector<std::string> DLG_file, std::vector<std::vector<std::st
 
 }
 
-  
-
-
-
-
-
 
 std::vector<std::string> read_input_dlg(std::string InputFile) {
 
   std::ifstream t( InputFile.c_str(), std::ifstream::in);
+  if (!t) {
+    std::cout << "Can't find file" << std::endl;
+    std::cout << "Currently in " << getenv("PWD") << std::endl;
+  }
   std::string Line;
   std::vector<std::string> dlg_string_file;
+  std::cout << "Trying to open " << InputFile.c_str() << std::endl;
 
   while (getline(t,Line))
   {
     std::stringstream buffer(Line);
+    std::cout << "TEST" << buffer.str().c_str() << std::endl;
     dlg_string_file.push_back(buffer.str());
     buffer.flush();
   }
-
-
 
   return dlg_string_file;
 }
@@ -290,15 +282,6 @@ int writesdf(std::vector<std::string> InputFileList, std::string OutputFile) {
   OpenBabel::OBConversion obconversion;
   std::vector<OpenBabel::OBMol> mol_array;
   std::vector<std::vector<std::string> > mol_vector_in_pdbqt;
-
-
-
-
-
-
-
-  
-
   std::string receptor_name;
   std::vector<std::string> SDTags;
   std::vector<std::string> SDData;
