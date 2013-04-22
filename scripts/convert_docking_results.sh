@@ -36,4 +36,4 @@ done
 
 rm -rf docking_results/tmp
 
-
+cp receptor/*.pdbqt docking_results

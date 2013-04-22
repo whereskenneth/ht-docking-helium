@@ -17,7 +17,7 @@ alias qstat='qstat -q AS'
 #################################
 #Openbabel variables
 
-export LD_LIBRARY_PATH=$SHARED_ROOT/usr/lib:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SHARED_ROOT/usr/lib
 export C_INCLUDE_PATH=$SHARED_ROOT/usr/include:$C_INCLUDE_PATH
 export CPP_INCLUDE_PATH=$SHARED_ROOT/usr/include:$CPP_INCLUDE_PATH
 
